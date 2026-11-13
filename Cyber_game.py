@@ -18,7 +18,7 @@ def game_over():
     print("\nGAME OVER!")
     print("Final Score:", score)
     input("\nPress Enter to exit...")
-    quit()
+    raise SystemExit
  
  
 def level1():
