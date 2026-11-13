@@ -1,190 +1,644 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+@import url(
+  'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&family=Quicksand:wght@500;600;700&display=swap'
+);
 
-  <title>Cyber Rescue | USP College</title>
+:root {
+  /* Core */
+  --usp-navy: #1B365D;
+  --usp-ink: #0F1F36;
+  --usp-blue: #1D4289;
+  --usp-white: #FFFFFF;
+  --usp-canvas: #F6F7FA;
 
-  <meta
-    name="description"
-    content="Play Cyber Rescue, a browser-based Python learning game."
-  >
+  /* Neutrals */
+  --usp-muted: #4A5B74;
+  --usp-muted-on-navy: #D6E0EE;
+  --usp-border: #D9DEE7;
+  --usp-rule: #9AA6B8;
 
-  <link rel="stylesheet" href="style.css">
-  <script src="game.js" defer></script>
-</head>
+  /* Accents */
+  --usp-orange: #FF6720;
+  --usp-red: #E40046;
+  --usp-magenta: #DA1984;
+  --usp-purple: #702F8A;
+  --usp-cyan: #4EC3E0;
+  --usp-lime: #97D700;
+  --usp-yellow: #FCE300;
 
-<body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  --usp-stripe: linear-gradient(
+    90deg,
+    var(--usp-orange) 0 20%,
+    var(--usp-red) 20% 40%,
+    var(--usp-magenta) 40% 60%,
+    var(--usp-purple) 60% 80%,
+    var(--usp-cyan) 80% 100%
+  );
+}
 
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <div class="header-text">
-        <span class="pill pill--orange">Python learning game</span>
-        <h1>Cyber Rescue</h1>
-        <p class="header-intro">
-          Complete six coding and cyber security challenges to restore
-          the college network.
-        </p>
-      </div>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-      <img
-        class="header-logo"
-        src="[APPROVED-WHITE-LOGO-URL]"
-        alt="USP College"
-      >
-      <!-- Replace with the approved white USP College logo -->
-    </div>
-  </header>
+html {
+  scroll-behavior: smooth;
+}
 
-  <div class="stripe" aria-hidden="true"></div>
+body {
+  margin: 0;
+  background: var(--usp-canvas);
+  color: var(--usp-navy);
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+}
 
-  <main id="main-content" class="wrap">
-    <section
-      class="section game-section"
-      aria-labelledby="game-heading"
-    >
-      <div class="game-status" aria-label="Game status">
-        <div class="status-item">
-          <span class="status-label">Level</span>
-          <strong id="level-display">Mission briefing</strong>
-        </div>
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: 'Quicksand', Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+}
 
-        <div class="status-item">
-          <span class="status-label">Score</span>
-          <strong id="score-display">0</strong>
-        </div>
+p {
+  margin: 0 0 0.75rem;
+}
 
-        <div class="status-item">
-          <span class="status-label">Progress</span>
-          <strong id="progress-display">0 of 6</strong>
-        </div>
-      </div>
+code {
+  padding: 0.1rem 0.3rem;
+  background: var(--usp-canvas);
+  border: 1px solid var(--usp-border);
+  border-radius: 4px;
+  color: var(--usp-ink);
+  font-family: monospace;
+}
 
-      <div class="progress-track" aria-hidden="true">
-        <div id="progress-bar" class="progress-bar"></div>
-      </div>
+a {
+  color: var(--usp-blue);
+}
 
-      <article class="game-card">
-        <div class="section-head">
-          <span
-            id="level-badge"
-            class="badge badge--orange"
-            aria-hidden="true"
-          >!</span>
+a:hover {
+  color: var(--usp-navy);
+}
 
-          <div>
-            <p id="level-label" class="eyebrow">Mission briefing</p>
-            <h2 id="game-heading">The network needs your help</h2>
-          </div>
-        </div>
+button,
+input,
+select {
+  font: inherit;
+}
 
-        <div
-          id="game-output"
-          class="game-output"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <p>
-            A dangerous AI virus has disrupted the college network.
-          </p>
-          <p>
-            Complete each challenge, collect points and restore the
-            system.
-          </p>
-        </div>
+:focus-visible {
+  outline: 3px solid var(--usp-blue);
+  outline-offset: 2px;
+}
 
-        <form id="answer-form" class="answer-form">
-          <div id="input-area">
-            <button
-              id="start-button"
-              class="btn btn--accent"
-              type="button"
-            >
-              Begin your mission
-            </button>
-          </div>
-        </form>
+.site-header :focus-visible,
+.key-point :focus-visible {
+  outline-color: var(--usp-yellow);
+}
 
-        <div id="feedback" class="feedback" aria-live="assertive"></div>
-      </article>
+/* Accessibility */
 
-      <aside class="key-point" aria-label="Game instructions">
-        <p class="key-point-label">How to play</p>
-        <p>
-          Read each challenge, enter or select your answer, and use the
-          submit button. Your answers are not case-sensitive.
-        </p>
-      </aside>
-    </section>
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--usp-yellow);
+  color: var(--usp-navy);
+  border-radius: 8px;
+  font-weight: 700;
+}
 
-    <section class="section" aria-labelledby="skills-heading">
-      <div class="section-head">
-        <span class="badge badge--cyan" aria-hidden="true">1</span>
-        <h2 id="skills-heading">Skills you will practise</h2>
-      </div>
+.skip-link:focus {
+  top: 1rem;
+}
 
-      <div class="cards">
-        <article class="card card--lime">
-          <h3>Python commands</h3>
-          <p>
-            Identify commands including
-            <code>print</code>, <code>input</code> and <code>if</code>.
-          </p>
-        </article>
+/* General layout */
 
-        <article class="card card--cyan">
-          <h3>Decision making</h3>
-          <p>
-            Choose appropriate responses to common cyber security
-            situations.
-          </p>
-        </article>
+.wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+}
 
-        <article class="card card--magenta">
-          <h3>Problem solving</h3>
-          <p>
-            Work through passwords, quizzes and a final system recovery
-            challenge.
-          </p>
-        </article>
-      </div>
-    </section>
+@media (min-width: 768px) {
+  .wrap {
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+  }
+}
 
-    <section class="section" aria-labelledby="about-heading">
-      <div class="section-head">
-        <span class="badge badge--lime" aria-hidden="true">2</span>
-        <h2 id="about-heading">About this version</h2>
-      </div>
+/* Header */
 
-      <ul class="rows">
-        <li class="row row--orange">
-          <span class="row-label">Original project</span>
-          <span>Terminal-based Python game</span>
-        </li>
+.site-header {
+  background: var(--usp-navy);
+  color: var(--usp-white);
+}
 
-        <li class="row row--cyan">
-          <span class="row-label">Browser version</span>
-          <span>HTML, CSS and JavaScript</span>
-        </li>
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 
-        <li class="row row--purple">
-          <span class="row-label">Hosting</span>
-          <span>Compatible with GitHub Pages</span>
-        </li>
-      </ul>
-    </section>
-  </main>
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
 
-  <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <span>USP College · Cyber Rescue</span>
-      <span>Python learning game</span>
-    </div>
-  </footer>
+.site-header h1 {
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+}
 
-  <div class="stripe" aria-hidden="true"></div>
-</body>
-</html>
+.header-intro {
+  max-width: 60ch;
+  margin: 0;
+  color: var(--usp-muted-on-navy);
+}
+
+.header-logo {
+  flex: none;
+  width: 72px;
+  height: auto;
+}
+
+.stripe {
+  height: 6px;
+  background: var(--usp-stripe);
+}
+
+@media (min-width: 768px) {
+  .header-logo {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    align-items: flex-start;
+  }
+
+  .header-logo {
+    width: 72px;
+  }
+}
+
+/* Pills and badges */
+
+.pill {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.badge {
+  display: grid;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 50%;
+  font-family: 'Quicksand', Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.pill--orange,
+.badge--orange {
+  background: var(--usp-orange);
+  color: var(--usp-ink);
+}
+
+.pill--cyan,
+.badge--cyan {
+  background: var(--usp-cyan);
+  color: var(--usp-navy);
+}
+
+.pill--lime,
+.badge--lime {
+  background: var(--usp-lime);
+  color: var(--usp-navy);
+}
+
+.badge--magenta {
+  background: var(--usp-magenta);
+  color: var(--usp-white);
+}
+
+.badge--purple {
+  background: var(--usp-purple);
+  color: var(--usp-white);
+}
+
+/* Page sections */
+
+main {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    margin-bottom: 3.5rem;
+  }
+}
+
+/* Game status */
+
+.game-section {
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.game-status {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 0.75rem 1rem;
+  background: var(--usp-white);
+  border: 1px solid var(--usp-border);
+  border-radius: 8px;
+}
+
+.status-label {
+  color: var(--usp-muted);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-item strong {
+  margin-left: 0.75rem;
+  font-family: 'Quicksand', Arial, sans-serif;
+}
+
+@media (min-width: 650px) {
+  .game-status {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .status-item {
+    display: block;
+  }
+
+  .status-item strong {
+    display: block;
+    margin-top: 0.2rem;
+    margin-left: 0;
+    font-size: 1.1rem;
+  }
+}
+
+.progress-track {
+  height: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: var(--usp-white);
+  border: 1px solid var(--usp-border);
+  border-radius: 999px;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background: var(--usp-orange);
+  transition: width 250ms ease;
+}
+
+/* Main game card */
+
+.game-card {
+  padding: 1.25rem;
+  background: var(--usp-white);
+  border: 1px solid var(--usp-border);
+  border-top: 4px solid var(--usp-orange);
+  border-radius: 8px;
+}
+
+@media (min-width: 650px) {
+  .game-card {
+    padding: 2rem;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 0.2rem;
+  color: var(--usp-muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.game-output {
+  min-height: 7rem;
+  max-width: 70ch;
+  padding: 1rem;
+  background: var(--usp-canvas);
+  border-left: 4px solid var(--usp-cyan);
+  border-radius: 0 8px 8px 0;
+}
+
+.game-output p:last-child {
+  margin-bottom: 0;
+}
+
+.score-message {
+  font-weight: 700;
+}
+
+.attempts {
+  color: var(--usp-muted);
+  font-weight: 700;
+}
+
+.health-display {
+  margin-top: 1rem;
+  font-family: 'Quicksand', Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Forms */
+
+.answer-form {
+  margin-top: 1.25rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.form-hint {
+  margin: 0.4rem 0 0;
+  color: var(--usp-muted);
+  font-size: 0.9rem;
+}
+
+.text-input,
+.select-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 0.75rem;
+  color: var(--usp-navy);
+  background: var(--usp-white);
+  border: 2px solid var(--usp-muted);
+  border-radius: 8px;
+}
+
+.text-input:focus,
+.select-input:focus {
+  border-color: var(--usp-blue);
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--usp-navy);
+  color: var(--usp-white);
+}
+
+.btn--accent {
+  background: var(--usp-orange);
+  color: var(--usp-ink);
+}
+
+.btn--secondary {
+  background: var(--usp-white);
+  color: var(--usp-navy);
+  border-color: var(--usp-navy);
+}
+
+.btn:hover {
+  text-decoration: underline;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Feedback */
+
+.feedback {
+  min-height: 1.75rem;
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.feedback--correct {
+  padding: 0.75rem 1rem;
+  color: var(--usp-navy);
+  background: var(--usp-lime);
+  border-radius: 8px;
+}
+
+.feedback--incorrect {
+  padding: 0.75rem 1rem;
+  color: var(--usp-white);
+  background: var(--usp-red);
+  border-radius: 8px;
+}
+
+/* Cards */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.card {
+  padding: 1rem 1.15rem;
+  background: var(--usp-white);
+  border: 1px solid var(--usp-border);
+  border-top: 4px solid var(--usp-cyan);
+  border-radius: 8px;
+}
+
+.card--lime {
+  border-top-color: var(--usp-lime);
+}
+
+.card--cyan {
+  border-top-color: var(--usp-cyan);
+}
+
+.card--magenta {
+  border-top-color: var(--usp-magenta);
+}
+
+.card h3 {
+  margin-bottom: 0.4rem;
+  font-size: 1.125rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Key point */
+
+.key-point {
+  margin: 1rem 0;
+  padding: 1rem 1.25rem;
+  color: var(--usp-white);
+  background: var(--usp-navy);
+  border-radius: 8px;
+}
+
+.key-point-label {
+  margin: 0 0 0.35rem;
+  color: var(--usp-yellow);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.key-point p:last-child {
+  margin: 0;
+}
+
+/* Rows */
+
+.rows {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  gap: 0.25rem 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--usp-white);
+  border: 1px solid var(--usp-border);
+  border-left: 4px solid var(--usp-orange);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.row--orange {
+  border-left-color: var(--usp-orange);
+}
+
+.row--cyan {
+  border-left-color: var(--usp-cyan);
+}
+
+.row--purple {
+  border-left-color: var(--usp-purple);
+}
+
+.row-label {
+  font-weight: 700;
+}
+
+@media (min-width: 600px) {
+  .row {
+    grid-template-columns: minmax(10rem, 18rem) 1fr;
+  }
+}
+
+/* Footer */
+
+.site-footer {
+  color: var(--usp-muted);
+  border-top: 1px solid var(--usp-border);
+  font-size: 0.8rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 
