@@ -1,1 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cyber Rescue | USP College</title>
+
+  <meta
+    name="description"
+    content="Play Cyber Rescue, a browser-based Python learning game."
+  >
+
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="header-text">
+        <span class="pill pill--orange">Python learning game</span>
+        <h1>Cyber Rescue</h1>
+        <p class="header-intro">
+          Complete six coding and cyber security challenges to restore
+          the college network.
+        </p>
+      </div>
+
+      <img
+        class="header-logo"
+        src="[APPROVED-WHITE-LOGO-URL]"
+        alt="USP College"
+      >
+      <!-- Replace with the approved white USP College logo -->
+    </div>
+  </header>
+
+  <div class="stripe" aria-hidden="true"></div>
+
+  <main id="main-content" class="wrap">
+    <section
+      class="section game-section"
+      aria-labelledby="game-heading"
+    >
+      <div class="game-status" aria-label="Game status">
+        <div class="status-item">
+          <span class="status-label">Level</span>
+          <strong id="level-display">Mission briefing</strong>
+        </div>
+
+        <div class="status-item">
+          <span class="status-label">Score</span>
+          <strong id="score-display">0</strong>
+        </div>
+
+        <div class="status-item">
+          <span class="status-label">Progress</span>
+          <strong id="progress-display">0 of 6</strong>
+        </div>
+      </div>
+
+      <div class="progress-track" aria-hidden="true">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+
+      <article class="game-card">
+        <div class="section-head">
+          <span
+            id="level-badge"
+            class="badge badge--orange"
+            aria-hidden="true"
+          >!</span>
+
+          <div>
+            <p id="level-label" class="eyebrow">Mission briefing</p>
+            <h2 id="game-heading">The network needs your help</h2>
+          </div>
+        </div>
+
+        <div
+          id="game-output"
+          class="game-output"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <p>
+            A dangerous AI virus has disrupted the college network.
+          </p>
+          <p>
+            Complete each challenge, collect points and restore the
+            system.
+          </p>
+        </div>
+
+        <form id="answer-form" class="answer-form">
+          <div id="input-area">
+            <button
+              id="start-button"
+              class="btn btn--accent"
+              type="button"
+            >
+              Begin your mission
+            </button>
+          </div>
+        </form>
+
+        <div id="feedback" class="feedback" aria-live="assertive"></div>
+      </article>
+
+      <aside class="key-point" aria-label="Game instructions">
+        <p class="key-point-label">How to play</p>
+        <p>
+          Read each challenge, enter or select your answer, and use the
+          submit button. Your answers are not case-sensitive.
+        </p>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="skills-heading">
+      <div class="section-head">
+        <span class="badge badge--cyan" aria-hidden="true">1</span>
+        <h2 id="skills-heading">Skills you will practise</h2>
+      </div>
+
+      <div class="cards">
+        <article class="card card--lime">
+          <h3>Python commands</h3>
+          <p>
+            Identify commands including
+            <code>print</code>, <code>input</code> and <code>if</code>.
+          </p>
+        </article>
+
+        <article class="card card--cyan">
+          <h3>Decision making</h3>
+          <p>
+            Choose appropriate responses to common cyber security
+            situations.
+          </p>
+        </article>
+
+        <article class="card card--magenta">
+          <h3>Problem solving</h3>
+          <p>
+            Work through passwords, quizzes and a final system recovery
+            challenge.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="about-heading">
+      <div class="section-head">
+        <span class="badge badge--lime" aria-hidden="true">2</span>
+        <h2 id="about-heading">About this version</h2>
+      </div>
+
+      <ul class="rows">
+        <li class="row row--orange">
+          <span class="row-label">Original project</span>
+          <span>Terminal-based Python game</span>
+        </li>
+
+        <li class="row row--cyan">
+          <span class="row-label">Browser version</span>
+          <span>HTML, CSS and JavaScript</span>
+        </li>
+
+        <li class="row row--purple">
+          <span class="row-label">Hosting</span>
+          <span>Compatible with GitHub Pages</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>USP College · Cyber Rescue</span>
+      <span>Python learning game</span>
+    </div>
+  </footer>
+
+  <div class="stripe" aria-hidden="true"></div>
+</body>
+</html>
 
